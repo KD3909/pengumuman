@@ -1,0 +1,8 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "sqlite" url = env("DATABASE_URL") }
+enum Role { SUPER_ADMIN ADMIN }
+model User { id String @id @default(cuid()) username String @unique passwordHash String role Role @default(ADMIN) createdAt DateTime @default(now()) }
+model Governor { id String @id @default(cuid()) governorId String @unique name String allianceId String? alliance Alliance? @relation(fields:[allianceId], references:[id], onDelete:SetNull) power Int @default(0) killPoints Int @default(0) deads Int @default(0) honor Int @default(0) status String @default("ACTIVE") createdAt DateTime @default(now()) updatedAt DateTime @updatedAt }
+model Alliance { id String @id @default(cuid()) name String tag String @unique power Int @default(0) memberCount Int @default(0) status String @default("ACTIVE") governors Governor[] createdAt DateTime @default(now()) updatedAt DateTime @updatedAt }
+model Event { id String @id @default(cuid()) title String description String? category String @default("GENERAL") startAt DateTime endAt DateTime? status String @default("UPCOMING") createdAt DateTime @default(now()) updatedAt DateTime @updatedAt }
+model News { id String @id @default(cuid()) title String content String category String @default("GENERAL") priority Boolean @default(false) publishedAt DateTime @default(now()) createdAt DateTime @default(now()) updatedAt DateTime @updatedAt }

@@ -1,0 +1,1 @@
+export default function Login(){return <main className="auth"><form action="/api/auth/login" method="post"><h1>♛ Royal Admin</h1><p>Masuk ke panel Kingdom 3909.</p><input name="username" placeholder="Username" required/><input name="password" type="password" placeholder="Password" required/><button className="btn">LOGIN</button></form></main>}
